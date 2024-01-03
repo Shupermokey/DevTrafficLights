@@ -1,28 +1,20 @@
 import { useState } from "react";
 
 export const FunctionalTrafficLight = () => {
-  const [lightColor, setLightColor] = useState([
-    "red",
-    "yellow",
-    "green",
-    "black",
-  ]);
+  const lightColor = ["red", "yellow", "green"];
   const [activeColor, setActiveColor] = useState(0);
-  const [inactiveColor, setInctiveColor] = useState(3);
 
   function changeColor() {
-    if (activeColor < 2) {
-      setActiveColor(activeColor + 1);
+    if (activeColor < 3) {
+      setActiveColor(activeColor + 2);
     } else {
       setActiveColor(0);
     }
   }
 
-  function returnLightColor(num: number) {
+  function returnClassNameColor(num: number) {
     return `circle ${
-      activeColor % 3 === num
-        ? lightColor[activeColor]
-        : lightColor[inactiveColor]
+      activeColor % 3 === num ? lightColor[activeColor] : "black"
     }`;
   }
 
@@ -31,9 +23,9 @@ export const FunctionalTrafficLight = () => {
       <h2>Functional Traffic Light</h2>
       <div className="traffic-light">
         {/* Background color can be black | yellow | red | green */}
-        <div className={returnLightColor(0)}></div>
-        <div className={returnLightColor(1)}></div>
-        <div className={returnLightColor(2)}></div>
+        <div className={returnClassNameColor(0)}></div>
+        <div className={returnClassNameColor(1)}></div>
+        <div className={returnClassNameColor(2)}></div>
       </div>
       <button onClick={changeColor} className="next-state-button">
         Next State

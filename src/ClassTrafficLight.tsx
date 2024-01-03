@@ -2,24 +2,23 @@ import { Component } from "react";
 
 export class ClassTrafficLight extends Component {
   state = {
-    lightColor: ["red", "yellow", "green", "black"],
+    lightColor: ["red", "yellow", "green"],
     activeColor: 0,
-    inactiveColor: 3,
   };
 
   changeColor = () => {
-    if (this.state.activeColor < 2) {
-      this.setState({ activeColor: this.state.activeColor + 1 });
+    if (this.state.activeColor < 3) {
+      this.setState({ activeColor: this.state.activeColor + 2 });
     } else {
       this.setState({ activeColor: 0 });
     }
   };
 
-  returnLightColor = (num: number) => {
+  returnClassNameColor = (num: number) => {
     return `circle ${
       this.state.activeColor % 3 === num
         ? this.state.lightColor[this.state.activeColor]
-        : this.state.lightColor[this.state.inactiveColor]
+        : "black"
     }`;
   };
   render() {
@@ -28,9 +27,9 @@ export class ClassTrafficLight extends Component {
         <h2>Class Traffic Light</h2>
         <div className="traffic-light">
           {/* Background color can be black | yellow | red | green */}
-          <div className={this.returnLightColor(0)}></div>
-          <div className={this.returnLightColor(1)}></div>
-          <div className={this.returnLightColor(2)}></div>
+          <div className={this.returnClassNameColor(0)}></div>
+          <div className={this.returnClassNameColor(1)}></div>
+          <div className={this.returnClassNameColor(2)}></div>
         </div>
         <button onClick={this.changeColor} className="next-state-button">
           Next State
